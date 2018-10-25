@@ -10,6 +10,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
 
+
+    //logo CARONA PRIME
     final logo = Container(
       //tag: 'hero',
       child: CircleAvatar(
@@ -26,6 +28,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
+
+    //Mensagem de login
     final welcome = Center(
       child: Container(
         child: Text(
@@ -38,12 +42,11 @@ class _LoginPageState extends State<LoginPage> {
     );
     
 
-    //User name field
+    //Campo de nome de usuário
     final username = TextFormField(
       style: TextStyle(fontSize: 20.0, color: Colors.black),
       keyboardType: TextInputType.text,
       autofocus: false,
-      //initialValue: 'Zé Piqueno',
       decoration: InputDecoration(
         hintText: 'Nome de usuario',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -53,12 +56,11 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   
-    //phone number field
+    //Campo de telefone
     final phone = TextFormField(
       style: TextStyle(fontSize: 20.0, color: Colors.black),
       keyboardType: TextInputType.phone,
       autofocus: false,
-      //initialValue: '99999-9999',
       decoration: InputDecoration(
         hintText: 'Celular',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    //Login button
+    //Botão de login
     final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
@@ -87,6 +89,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
+
+    //Não definido
     final forgotLabel = FlatButton(
       child: Text(
         'Esqueceu a senha?',
@@ -97,6 +101,7 @@ class _LoginPageState extends State<LoginPage> {
     },
     );
 
+    
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
