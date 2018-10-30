@@ -15,25 +15,25 @@ class _LoginPageState extends State<LoginPage> {
     final logo = Container(
       //tag: 'hero',
       child: CircleAvatar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         radius: 48.0,
-        child: Image.asset('assets/logo.png'),    
+        child: Image.asset('assets/logohd.png'),    
       ),
-      width: 100.0,
-      height: 100.0,
-      padding: const EdgeInsets.all(2.0),
+      width: 130.0,
+      height: 130.0,
+      padding: const EdgeInsets.only(top: 15.0, bottom: 15.0, left: 15.0, right: 15.0),
       decoration: new BoxDecoration(
-        color: Colors.red,
+        color: Color(0xFFCC4B22),
         shape: BoxShape.circle,
       ),
     );
 
 
     //Mensagem de login
-    final welcome = Center(
+    final message = Center(
       child: Container(
         child: Text(
-          'Bem vindo ao Carona Prime',
+          'Informe seu nome e o número de telefone',
           style: TextStyle(
             fontSize: 23.0,
           ),
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () {
           //  Navigator.of(context).pushNamed(HomePage.tag);
           },
-          color: Colors.red,
+          color: Color(0xFFCC4B22),
           child: Text('Cadastrar', style: TextStyle(color: Colors.white, fontSize: 20.0)),
         ),
       ),
@@ -104,23 +104,26 @@ class _LoginPageState extends State<LoginPage> {
     
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('Carona Prime')
+      ),
       body: Center(
         child: ListView(
-          shrinkWrap: true,
+          shrinkWrap: false,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
-            SizedBox(height: 80.0,),
+            SizedBox(height: 25.0,),
             logo,
             SizedBox(height: 30.0,),
-            welcome,
-            SizedBox(height: 80.0,),
+            message,
+            SizedBox(height: 40.0,),
             username,
             SizedBox(height: 10.0,),
             phone,
             SizedBox(height: 10.0,),
             loginButton,
             forgotLabel,
-            SizedBox(height: 35.0,),
+            SizedBox(height: 20.0,),
           ],
         )
       )
