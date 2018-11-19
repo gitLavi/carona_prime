@@ -1,4 +1,6 @@
+import 'package:carona_prime/login/login_page.dart';
 import 'package:flutter/material.dart';
+
 
 class WelcomePage extends StatelessWidget {
   static String tag = 'login-page';
@@ -55,7 +57,10 @@ class WelcomePage extends StatelessWidget {
                 ),
               ),
               onPressed: (){
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=> LoginPage()),
+                );
               },
             ),
           ],

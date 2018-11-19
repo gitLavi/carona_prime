@@ -1,4 +1,8 @@
+import 'package:carona_prime/login/status_login.dart';
 import 'package:flutter/material.dart';
+
+String userName;
+String phoneNumber;
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -6,10 +10,16 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
+final phoneController = new TextEditingController();
+final userController = new TextEditingController();
+
 class _LoginPageState extends State<LoginPage> {
   @override
+
+
   Widget build(BuildContext context) {
 
+    
 
     //logo CARONA PRIME
     final logo = Container(
@@ -44,6 +54,7 @@ class _LoginPageState extends State<LoginPage> {
 
     //Campo de nome de usuário
     final username = TextFormField(
+      controller: userController,
       style: TextStyle(fontSize: 20.0, color: Colors.black),
       keyboardType: TextInputType.text,
       autofocus: false,
@@ -58,6 +69,7 @@ class _LoginPageState extends State<LoginPage> {
   
     //Campo de telefone
     final phone = TextFormField(
+      controller: phoneController,
       style: TextStyle(fontSize: 20.0, color: Colors.black),
       keyboardType: TextInputType.phone,
       autofocus: false,
@@ -81,7 +93,12 @@ class _LoginPageState extends State<LoginPage> {
           minWidth: 200.0,
           height: 50.0,
           onPressed: () {
-          //  Navigator.of(context).pushNamed(HomePage.tag);
+            userName = (userController.text);
+            phoneNumber = (phoneController.text);
+            Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=> StatusLogin())
+            );
           },
           color: Color(0xFFCC4B22),
           child: Text('Cadastrar', style: TextStyle(color: Colors.white, fontSize: 20.0)),
@@ -93,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
     //Não definido
     final forgotLabel = FlatButton(
       child: Text(
-        'Esqueceu a senha?',
+        'Para que servem esses dados?',
         style: TextStyle(color: Colors.black54),
     ),
     onPressed: () {
@@ -116,14 +133,14 @@ class _LoginPageState extends State<LoginPage> {
             logo,
             SizedBox(height: 30.0,),
             message,
-            SizedBox(height: 40.0,),
+            SizedBox(height: 20.0,),
             username,
             SizedBox(height: 10.0,),
             phone,
             SizedBox(height: 10.0,),
             loginButton,
             forgotLabel,
-            SizedBox(height: 20.0,),
+           // SizedBox(height: 20.0,),
           ],
         )
       )
