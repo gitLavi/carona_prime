@@ -1,3 +1,6 @@
+
+import 'package:carona_prime/contacts/contact_helper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carona_prime/login/status_login.dart';
 import 'package:flutter/material.dart';
 
@@ -18,9 +21,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
   Widget build(BuildContext context) {
-
     
-
     //logo CARONA PRIME
     final logo = Container(
       //tag: 'hero',
@@ -43,7 +44,8 @@ class _LoginPageState extends State<LoginPage> {
     final message = Center(
       child: Container(
         child: Text(
-          'Informe seu nome e o número de telefone',
+          'Informe seu número de telefone',
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 23.0,
           ),
@@ -93,12 +95,15 @@ class _LoginPageState extends State<LoginPage> {
           minWidth: 200.0,
           height: 50.0,
           onPressed: () {
+            
+            checkContactFb("phone");
+
             userName = (userController.text);
             phoneNumber = (phoneController.text);
-            Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context)=> StatusLogin())
-            );
+            //Navigator.push(
+            //      context,
+            //      MaterialPageRoute(builder: (context)=> StatusLogin())
+            //);
           },
           color: Color(0xFFCC4B22),
           child: Text('Cadastrar', style: TextStyle(color: Colors.white, fontSize: 20.0)),
@@ -124,25 +129,59 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('Carona Prime')
       ),
-      body: Center(
-        child: ListView(
-          shrinkWrap: false,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            SizedBox(height: 25.0,),
-            logo,
-            SizedBox(height: 30.0,),
-            message,
-            SizedBox(height: 20.0,),
-            username,
-            SizedBox(height: 10.0,),
-            phone,
-            SizedBox(height: 10.0,),
-            loginButton,
-            forgotLabel,
-           // SizedBox(height: 20.0,),
-          ],
-        )
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            flex: 2,
+            child: SizedBox(
+              width: 0,
+              height: 0,
+            ),
+          ),
+          logo,
+          Expanded(
+            flex: 3,
+            child: SizedBox(
+              width: 0,
+              height: 0,
+            ),
+          ),
+          message,
+          Expanded(
+            flex: 3,
+            child: SizedBox(
+              width: 0,
+              height: 0,
+            ),
+          ),
+          //username,
+          phone,
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              width: 0,
+              height: 0,
+            ),
+          ),
+          loginButton,
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              width: 0,
+              height: 0,
+            ),
+          ),
+          forgotLabel,
+          Expanded(
+            flex: 3,
+            child: SizedBox(
+              width: 0,
+              height: 0,
+            ),
+          )
+        ],
       )
     );
   }

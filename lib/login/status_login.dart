@@ -7,93 +7,55 @@ class StatusLogin extends StatefulWidget {
 }
 
 bool pressAttention = true;
-String status;
+String status = "caroneiro";
 
 class _StatusLoginState extends State<StatusLogin> {
   @override
   Widget build(BuildContext context) {
 
-    final caroneiro = Container(
-      height: 80.0,
-      width: 120.0,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: new IconButton(
-            padding: new EdgeInsets.all(0.0),
-            icon: Icon(
-              Icons.directions_walk,
-              color: pressAttention ? Colors.black26 : Color(0xFFCC4B22),
-              size: 80.0,
-            ),
-            onPressed: () {
-              status = 'Caroneiro';
-              setState(() {
-                if(pressAttention){
-                  pressAttention = !pressAttention;
-                }  
-              });
-        },
+    final caroneiro = RaisedButton(
+      disabledColor: Colors.white10,
+      splashColor: Colors.white10,
+      highlightColor: Colors.white10,
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(300)),
+      color: Colors.white10,
+      child: Icon(
+        Icons.directions_walk,
+        size: 80,
+        color: pressAttention ? Colors.black26 : Color(0xFFCC4B22)
       ),
-            
-          ),
-          Expanded(
-            child: Container(
-              height: 80.0,
-              width: 90.0,
-              padding: EdgeInsets.only(top: 30.0, left: 20.0),
-              child: Text(
-                "Caroneiro",
-                style: TextStyle(
-                  fontSize: 16.0
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
+      onPressed: () {
+        status = "caroneiro";
+        setState(() {
+          if(pressAttention){
+            pressAttention = !pressAttention;
+          } 
+        });
+      },
     );
-
-    final motorista = Container(
-      height: 80.0,
-      width: 120.0,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: new IconButton(
-            padding: new EdgeInsets.all(0.0),
-            icon: Icon(
-              Icons.directions_car,
-              color: pressAttention ? Color(0xFFCC4B22) : Colors.black26,
-              size: 80.0,
-            ),
-            onPressed: () {
-              status = 'Motorista';
-              setState(() {
-                if(!pressAttention){
-                  pressAttention = !pressAttention;
-                }  
-              });
-        },
+    
+    final motorista = RaisedButton(
+      disabledColor: Colors.white10,
+      splashColor: Colors.white10,
+      highlightColor: Colors.white10,
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(300)),
+      color: Colors.white10,
+      child: Icon(
+        Icons.directions_car,
+        size: 80,
+        color: pressAttention ? Color(0xFFCC4B22) : Colors.black26
       ),
-            
-          ),
-          Expanded(
-            child: Container(
-              height: 80.0,
-              width: 90.0,
-              padding: EdgeInsets.only(top: 30.0, left: 20.0),
-              child: Text(
-                "Motorista",
-                style: TextStyle(
-                  fontSize: 16.0
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );  
+      onPressed: () {
+        status = "motorista";
+        setState(() {
+          if(!pressAttention){
+            pressAttention = !pressAttention;
+          } 
+        });
+      },
+    );
 
     return Scaffold(
       appBar: new AppBar(
@@ -126,17 +88,14 @@ class _StatusLoginState extends State<StatusLogin> {
         )
       ),
 
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            caroneiro,
-            SizedBox(width: 75.0,),
-            motorista
-          ],
-        ),
-      ),
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          caroneiro,
+          motorista
+        ],
+      )
     );
   }
 }

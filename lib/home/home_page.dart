@@ -1,3 +1,4 @@
+import 'package:carona_prime/contacts/contact_helper.dart';
 import 'package:carona_prime/login/status_login.dart';
 import 'package:carona_prime/login/login_page.dart';
 import 'package:carona_prime/login/welcome_page.dart';
@@ -10,6 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  ContactHelper helper = ContactHelper();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
