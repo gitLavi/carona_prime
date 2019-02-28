@@ -21,7 +21,7 @@ class _ContactPhoneState extends State<ContactPhone> {
     );
   }
 }
-int caralho;
+int caralho = 2;
 class ContactListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
