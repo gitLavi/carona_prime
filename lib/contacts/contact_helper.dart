@@ -84,9 +84,9 @@ class ContactHelper {
 
   Future<bool> checkContactFb (String phone) async {
     QuerySnapshot snapshot = await Firestore.instance.collection("users").getDocuments();
-    bool ctc = true;
+    bool ctc = false;
     for (DocumentSnapshot doc in snapshot.documents){ 
-      ctc = ctc && doc.data.containsKey("phone");
+      ctc = ctc || doc.data.containsKey(phone);
     }
     print(ctc);
   }

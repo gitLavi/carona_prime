@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
           height: 50.0,
           onPressed: () {
             
-            checkContactFb("phone");
+            checkContactFb(phoneController.text);
 
             userName = (userController.text);
             phoneNumber = (phoneController.text);
