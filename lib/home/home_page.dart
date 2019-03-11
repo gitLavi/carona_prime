@@ -16,6 +16,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    
+    final testContact = RaisedButton (
+      onPressed: () {
+        helper.mergeFbToCp();
+      },
+    );
+
     return Scaffold(
       appBar: new AppBar(
         title: new Text('Carona Prime')
@@ -46,6 +53,7 @@ class _HomePageState extends State<HomePage> {
         )
       ),
     
+
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -54,8 +62,9 @@ class _HomePageState extends State<HomePage> {
             Text(
               "Usuário: " + userName + "\n"
               "Numero: " + phoneNumber + "\n"
-              "Status: " + status
+              "Status: " + status,
             ),
+            testContact
           ],
         ),
       ),

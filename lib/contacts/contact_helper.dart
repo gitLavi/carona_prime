@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:contacts_service/contacts_service.dart';
 import 'dart:async';
+import 'package:permission_handler/permission_handler.dart';
 
 final String contactTable = "contactTable";
-final String idColumn = "idColumn";
 final String nameColumn = "nameColumn";
 final String phoneColumn = "phoneColumn";
 final String imgColumn = "imgColumn";
@@ -34,23 +35,23 @@ class ContactHelper {
 
     return openDatabase(path, version: 1, onCreate: (Database db, int newerVersion) async {
       await db.execute(
-        "CREATE TABLE $contactTable($idColumn INTEGER PRIMARY KEY, $nameColumn TEXT, $phoneColumn TEXT, $imgColumn TEXT)"
+        "CREATE TABLE $contactTable($phoneColumn INTEGER PRIMARY KEY, $nameColumn TEXT, $imgColumn TEXT)"
       );
     });
   }
 
   Future<ContactCp> saveContactCp(ContactCp contact) async {
     Database dbContact = await db;
-    contact.id = await dbContact.insert(contactTable, contact.toMap());
+    contact.phone = (await dbContact.insert(contactTable, contact.toMap())) as String;
     return contact;
   }
 
-  Future<ContactCp> getContactCp(int id) async {
+  Future<ContactCp> getContactCp(String phone) async {
     Database dbContactCp = await db;
     List<Map> maps = await dbContactCp.query(contactTable,
-    columns: [idColumn, nameColumn, phoneColumn, imgColumn],
-    where: "$idColumn = ?",
-    whereArgs: [id]);
+    columns: [phoneColumn, nameColumn, imgColumn],
+    where: "$phoneColumn = ?",
+    whereArgs: [phone]);
     if(maps.length > 0){
       return ContactCp.fromMap(maps.first);
     }else{
@@ -58,15 +59,15 @@ class ContactHelper {
     }
   }
 
-  Future<int> deleteContactCp(int id) async {
+  Future<int> deleteContactCp(String phone) async {
     Database dbContactCp = await db;
-    await dbContactCp.delete(contactTable, where: "$idColumn = ?", whereArgs: [id]);
+    await dbContactCp.delete(contactTable, where: "$phoneColumn = ?", whereArgs: [phone]);
     return 0;
   }
 
   Future<int> updateContactCp (ContactCp contactCp) async {
     Database dbContactCp = await db;
-    await dbContactCp.update(contactTable, contactCp.toMap(), where: "$idColumn = ?", whereArgs:[contactCp.id]);
+    await dbContactCp.update(contactTable, contactCp.toMap(), where: "$phoneColumn = ?", whereArgs:[contactCp.phone]);
     return 0;
   }
 
@@ -95,16 +96,38 @@ class ContactHelper {
   }
 
   Future<bool> createContactFb (String phone) async {
-    DocumentReference snapshot = Firestore.instance.collection("users").document("contacts");
-    snapshot.setData({phone:""},merge: true);
+    DocumentReference contactDoc = Firestore.instance.collection("users").document("contacts");
+    contactDoc.setData({phone:""},merge: true);
     return true;
   }
+
+  Future<bool> setStatusFb (String phone, String status) async {
+    DocumentReference contactDoc = Firestore.instance.collection("users").document("contacts");
+    contactDoc.updateData({phone : status});
+    return true;
+  }
+
+  Future<Contact> mergeFbToCp () async {
+    Map<PermissionGroup, PermissionStatus> permissions = await PermissionHandler().requestPermissions([PermissionGroup.contacts]);
+    var contacts = await ContactsService.getContacts();
+    QuerySnapshot snapshot = await Firestore.instance.collection("users").getDocuments();
+    print(contacts.first.phones.first.value.replaceAll(new RegExp(r'[^\w]'), ""));
+    for(Contact contacList in contacts){
+      if (snapshot.documents[0].data.containsKey(contacList.phones.first.value.replaceAll(new RegExp(r'[^\w]'), ""))){
+        ContactCp c =ContactCp();
+        c.phone =  '3123123'; //(contacList.phones.first.value.replaceAll(new RegExp(r'[^\w]'), ""));
+        c.name =contacList.givenName;
+        saveContactCp(c);
+      }
+    }  
+  }
+
+
 
 }
 
 class ContactCp {
 
-  int id;
   String name;
   String phone;
   String img;
@@ -112,7 +135,6 @@ class ContactCp {
   ContactCp();
 
   ContactCp.fromMap(Map map){
-    id = map[idColumn];
     name = map[nameColumn];
     phone = map[nameColumn];
     img = map[imgColumn];
@@ -124,15 +146,15 @@ class ContactCp {
       phoneColumn: phone,
       imgColumn: img
     };
-    if(id = null) {
-      map[idColumn] = id;
+    if(phone != null) {
+      map[phoneColumn] = phone;
     }
     return map;
   }
 
   @override
   String toString() {
-    return "ContactCp(id: $id, name: $name, phone: $phone, img: $img";
+    return "ContactCp( phone: $phone, name: $name, img: $img)";
   }
 
 }

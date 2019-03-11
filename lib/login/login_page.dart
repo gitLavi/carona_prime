@@ -101,7 +101,6 @@ class _LoginPageState extends State<LoginPage> {
               helper.createContactFb(phoneController.text);
             }
             
-
             userName = (userController.text);
             phoneNumber = (phoneController.text);
     

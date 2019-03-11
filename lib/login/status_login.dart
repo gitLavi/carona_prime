@@ -1,3 +1,4 @@
+import 'package:carona_prime/contacts/contact_helper.dart';
 import 'package:carona_prime/home/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,9 @@ bool pressAttention = true;
 String status = "caroneiro";
 
 class _StatusLoginState extends State<StatusLogin> {
+
+  ContactHelper helper = ContactHelper();
+
   @override
   Widget build(BuildContext context) {
 
@@ -77,7 +81,10 @@ class _StatusLoginState extends State<StatusLogin> {
                   fontSize: 20.0 ,
                 ),
               ),
-              onPressed: (){
+              onPressed: () async {
+
+                helper.setStatusFb("65992740046", status);
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context)=> HomePage())
