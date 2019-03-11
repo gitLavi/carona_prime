@@ -1,6 +1,4 @@
-
 import 'package:carona_prime/contacts/contact_helper.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carona_prime/login/status_login.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +15,7 @@ final phoneController = new TextEditingController();
 final userController = new TextEditingController();
 
 class _LoginPageState extends State<LoginPage> {
-  @override
-
+  ContactHelper helper = ContactHelper();
 
   Widget build(BuildContext context) {
     
@@ -68,7 +65,8 @@ class _LoginPageState extends State<LoginPage> {
         )
       ),
     );
-  
+
+
     //Campo de telefone
     final phone = TextFormField(
       controller: phoneController,
@@ -94,19 +92,22 @@ class _LoginPageState extends State<LoginPage> {
         child: MaterialButton(
           minWidth: 200.0,
           height: 50.0,
-          onPressed: () {
+          onPressed: () async {            
+            bool check = false;
+            check = await helper.checkContactFb(phoneController.text);
+            if (check) {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> StatusLogin()));
+            }else{
+              helper.createContactFb(phoneController.text);
+            }
             
-            checkContactFb(phoneController.text);
 
             userName = (userController.text);
             phoneNumber = (phoneController.text);
-            //Navigator.push(
-            //      context,
-            //      MaterialPageRoute(builder: (context)=> StatusLogin())
-            //);
+    
           },
           color: Color(0xFFCC4B22),
-          child: Text('Cadastrar', style: TextStyle(color: Colors.white, fontSize: 20.0)),
+          child: Text('Entrar', style: TextStyle(color: Colors.white, fontSize: 20.0)),
         ),
       ),
     );

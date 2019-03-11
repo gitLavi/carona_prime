@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'dart:async';
 
 final String contactTable = "contactTable";
 final String idColumn = "idColumn";
@@ -52,17 +53,21 @@ class ContactHelper {
     whereArgs: [id]);
     if(maps.length > 0){
       return ContactCp.fromMap(maps.first);
+    }else{
+      return null;
     }
   }
 
   Future<int> deleteContactCp(int id) async {
     Database dbContactCp = await db;
     await dbContactCp.delete(contactTable, where: "$idColumn = ?", whereArgs: [id]);
+    return 0;
   }
 
   Future<int> updateContactCp (ContactCp contactCp) async {
     Database dbContactCp = await db;
     await dbContactCp.update(contactTable, contactCp.toMap(), where: "$idColumn = ?", whereArgs:[contactCp.id]);
+    return 0;
   }
 
   Future<List> getAllContactsCp () async {
@@ -80,16 +85,22 @@ class ContactHelper {
     await dbContactCp.close();
   }
 
-}
-
   Future<bool> checkContactFb (String phone) async {
     QuerySnapshot snapshot = await Firestore.instance.collection("users").getDocuments();
-    bool ctc = false;
-    for (DocumentSnapshot doc in snapshot.documents){ 
-      ctc = ctc || doc.data.containsKey(phone);
+    if(snapshot.documents[0].data.containsKey(phone)){
+      return(true);
+    }else{
+      return(false);
     }
-    print(ctc);
   }
+
+  Future<bool> createContactFb (String phone) async {
+    DocumentReference snapshot = Firestore.instance.collection("users").document("contacts");
+    snapshot.setData({phone:""},merge: true);
+    return true;
+  }
+
+}
 
 class ContactCp {
 

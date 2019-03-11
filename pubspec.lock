@@ -36,13 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.11"
-  contacts_plugin:
-    dependency: "direct main"
-    description:
-      name: contacts_plugin
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -95,13 +88,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
-  permission_handler:
-    dependency: transitive
-    description:
-      name: permission_handler
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.2"
   quiver:
     dependency: transitive
     description:
