@@ -18,6 +18,8 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <application
+
+    
         android:name="io.flutter.app.FlutterApplication"
         android:label="carona_prime"
         android:icon="@mipmap/ic_launcher">
@@ -40,5 +42,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <meta-data android:name="com.google.android.geo.AIzaSyABVW1uf-QlNReD4eB599xFLl8D8GZOuDg"
+               android:value="AIzaSyABVW1uf-QlNReD4eB599xFLl8D8GZOuDg"/>
     </application>
 </manifest>
