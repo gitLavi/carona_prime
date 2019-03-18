@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1083086413310",
+    "firebase_url": "https://caronaprime.firebaseio.com",
+    "project_id": "caronaprime",
+    "storage_bucket": "caronaprime.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083086413310:android:efe4e7c64328285f",
+        "android_client_info": {
+          "package_name": "com.example.caronaprime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083086413310-6mrfqdtm3gks8fvmi03csl1ju9im4eqm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.caronaprime",
+            "certificate_hash": "307a4bef6653fa9bb03756e23d20712f64223e93"
+          }
+        },
+        {
+          "client_id": "1083086413310-k8fvn550hc3r0c1nchkj6rkc13qmbnkk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABVW1uf-QlNReD4eB599xFLl8D8GZOuDg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083086413310-k8fvn550hc3r0c1nchkj6rkc13qmbnkk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
