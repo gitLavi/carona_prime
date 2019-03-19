@@ -21,6 +21,7 @@ class ContactHelper {
 
   Database _db;
 
+  //Retorna o banco de dados e o inicia caso não esteja aberto
   Future<Database> get db async {
     if(_db != null){
       return _db;
@@ -30,6 +31,7 @@ class ContactHelper {
     }
   }
 
+  //inicia banco de dados
   Future<Database> initDb() async {
     final databasesPath = await getDatabasesPath();
     final path = join(databasesPath, "constructsnew.db");
@@ -40,12 +42,14 @@ class ContactHelper {
     });
   }
 
+  //Salva um contato no banco de dados
   Future<ContactCp> saveContactCp(ContactCp contactCp) async {
     Database dbContact = await db;
     contactCp.id = await dbContact.insert(contactTable, contactCp.toMap());
     return contactCp;
   }
 
+  //retorna o contato a partir do ID
   Future<ContactCp> getContactCp(int id) async {
     Database dbContactCp = await db;
     List<Map> maps = await dbContactCp.query(contactTable,
@@ -59,16 +63,17 @@ class ContactHelper {
     }
   }
 
+  //Apaga o contato a partir do ID
   Future<int> deleteContactCp(int id) async {
     Database dbContactCp = await db;
     return await dbContactCp.delete(contactTable, where: "$idColumn = ?", whereArgs: [id]);
   }
-
   Future<int> updateContactCp (ContactCp contactCp) async {
     Database dbContactCp = await db;
     return await dbContactCp.update(contactTable, contactCp.toMap(), where: "$idColumn = ?", whereArgs:[contactCp.id]);
   }
 
+  //Retorna todos os contatos salvos
   Future<List> getAllContactsCp () async {
     Database dbContactCp = await db;
     List listMap = await dbContactCp.rawQuery("SELECT * FROM $contactTable");
@@ -79,11 +84,13 @@ class ContactHelper {
     return listContactCp;
   }
 
+  //fecha o banco de dados
   Future close () async {
     Database dbContactCp = await db;
     await dbContactCp.close();
   }
 
+  //Verifica se o contato está cadastrado no firebase
   Future<bool> checkContactFb (String phone) async {
     QuerySnapshot snapshot = await Firestore.instance.collection("users").getDocuments();
     if(snapshot.documents[0].data.containsKey(phone)){
@@ -93,18 +100,30 @@ class ContactHelper {
     }
   }
 
+  //cadastra o contato no firebase
   Future<bool> createContactFb (String phone) async {
     DocumentReference contactDoc = Firestore.instance.collection("users").document("contacts");
     contactDoc.setData({phone:""},merge: true);
     return true;
   }
 
+  //loga/cria contato no servidor
+  Future<bool> logInUser (String phone) async {
+    if(await checkContactFb(phone)){
+      return true;
+    } else{
+      return await createContactFb(phone);
+    }
+  }
+
+  //muda o status do usuario no firebase
   Future<bool> setStatusFb (String phone, String status) async {
     DocumentReference contactDoc = Firestore.instance.collection("users").document("contacts");
     contactDoc.updateData({phone : status});
     return true;
   }
 
+  //relaciona contatos do celular com os contatos cadastrados no firebase para gerar lista de contatos do aplicativo
   Future<Contact> mergeFbToCp () async {
     Map<PermissionGroup, PermissionStatus> permissions = await PermissionHandler().requestPermissions([PermissionGroup.contacts]);
     var contacts = await ContactsService.getContacts();
@@ -129,6 +148,7 @@ class ContactHelper {
 
 }
 
+//classe de contatos
 class ContactCp {
 
   int id;
@@ -138,6 +158,7 @@ class ContactCp {
 
   ContactCp();
 
+  //transforma dados do contatos de Map para ContactCp
   ContactCp.fromMap(Map map){
     id = map[idColumn];
     name = map[nameColumn];
@@ -145,6 +166,7 @@ class ContactCp {
     img = map[imgColumn];
   }
 
+  //transforma dados do contato de ContactPc para Map
   Map toMap(){
     Map<String, dynamic> map = {
       nameColumn: name,

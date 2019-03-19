@@ -1,7 +1,6 @@
 import 'package:carona_prime/contacts/contact_helper.dart';
 import 'package:carona_prime/home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:carona_prime/login/login_page.dart';
 
 class StatusLogin extends StatefulWidget {
   @override
@@ -84,7 +83,7 @@ class _StatusLoginState extends State<StatusLogin> {
               ),
               onPressed: () async {
 
-                helper.setStatusFb(phoneNumber, status);
+                helper.setStatusFb("65992740046", status);
 
                 Navigator.push(
                   context,

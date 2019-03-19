@@ -25,10 +25,14 @@ class _LoginPageState extends State<LoginPage> {
       child: CircleAvatar(
         backgroundColor: Colors.white,
         radius: 48.0,
-        child: Image.asset('assets/logohd.png'),    
+        child: Image.asset(
+          'assets/logohd.png',
+          height: 140,
+          ),
+            
       ),
-      width: 130.0,
-      height: 130.0,
+      width: 180.0,
+      height: 180.0,
       padding: const EdgeInsets.only(top: 15.0, bottom: 15.0, left: 15.0, right: 15.0),
       decoration: new BoxDecoration(
         color: Color(0xFFCC4B22),
@@ -93,12 +97,10 @@ class _LoginPageState extends State<LoginPage> {
           minWidth: 200.0,
           height: 50.0,
           onPressed: () async {            
-            bool check = false;
-            check = await helper.checkContactFb(phoneController.text);
-            if (check) {
+            if (await helper.logInUser(phoneController.text)) {
               Navigator.push(context, MaterialPageRoute(builder: (context)=> StatusLogin()));
             }else{
-              helper.createContactFb(phoneController.text);
+              
             }
             
             userName = (userController.text);
@@ -129,60 +131,32 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('Carona Prime')
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: SizedBox(
-              width: 0,
-              height: 0,
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(10.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                logo,
+                SizedBox(
+                  width: 30,
+                  height: 30,
+                ),
+                message,
+                SizedBox(
+                  width: 30,
+                  height: 30,
+                ),
+                phone,
+                loginButton,
+                forgotLabel
+              ],
             ),
           ),
-          logo,
-          Expanded(
-            flex: 3,
-            child: SizedBox(
-              width: 0,
-              height: 0,
-            ),
-          ),
-          message,
-          Expanded(
-            flex: 3,
-            child: SizedBox(
-              width: 0,
-              height: 0,
-            ),
-          ),
-          //username,
-          phone,
-          Expanded(
-            flex: 1,
-            child: SizedBox(
-              width: 0,
-              height: 0,
-            ),
-          ),
-          loginButton,
-          Expanded(
-            flex: 1,
-            child: SizedBox(
-              width: 0,
-              height: 0,
-            ),
-          ),
-          forgotLabel,
-          Expanded(
-            flex: 3,
-            child: SizedBox(
-              width: 0,
-              height: 0,
-            ),
-          )
-        ],
-      )
+        ),
+      ),
     );
   }
 }
