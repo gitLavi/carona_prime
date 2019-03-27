@@ -1,10 +1,11 @@
 import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:flutter/material.dart';
 import 'package:carona_prime/contacts/contact_helper.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:uuid/uuid.dart';
 
 ContactHelper helper = ContactHelper();
+FirebaseMessaging _messaging = FirebaseMessaging();
 
 class GroupHelper {
 
@@ -25,15 +26,19 @@ class GroupHelper {
       addMember(rg.adm, "Motorista", rg.groupId);
   }
 
+  Future<bool> groupRequest(String phone, String admPhone, String gpId) async {
+    DocumentReference ctRequest = Firestore.instance.collection("userInf").document(phone + "_requests");
+    ctRequest.setData({admPhone : gpId}, merge: true);
+  }
+
   Future<bool> addMember(String phone, String status, String id){
     DocumentReference groupInfo = Firestore.instance.collection("groups").document(
       "group_"+ id +"_members"
       );
-     groupInfo.setData({phone :status}, merge: true);
+     groupInfo.setData({phone : status}, merge: true);
   }
-  testGp(){
-    
-  }
+  
+  
 
 }
 

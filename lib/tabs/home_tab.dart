@@ -11,6 +11,7 @@ class HomeTab extends StatelessWidget {
       children: <Widget>[
         _buildBodyBack(),
         CustomScrollView(
+          shrinkWrap: true,
           slivers: <Widget>[
             SliverAppBar(
               floating: true,
