@@ -1,8 +1,8 @@
 import 'package:carona_prime/contacts/contact_list.dart';
 import 'package:flutter/material.dart';
-import 'package:carona_prime/contacts/contact_helper.dart';
 
 class GroupsList extends StatefulWidget {
+
   @override
   _GroupsListState createState() => _GroupsListState();
 }
@@ -17,9 +17,9 @@ class _GroupsListState extends State<GroupsList> {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
-      body:
-      ContactList(),
+      body: ContactList(),
     );
+
   }
 }
 
