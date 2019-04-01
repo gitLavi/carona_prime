@@ -1,6 +1,7 @@
 import 'package:carona_prime/contacts/contact_helper.dart';
 import 'package:carona_prime/login/status_login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 String userName;
 String phoneNumber;
@@ -18,14 +19,14 @@ class _LoginPageState extends State<LoginPage> {
   ContactHelper helper = ContactHelper();
 
   Widget build(BuildContext context) {
-    
+
     //logo CARONA PRIME
     final logo = Container(
       //tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.white,
         radius: 48.0,
-        child: Image.asset('assets/logohd.png'),    
+        child: Image.asset('assets/logohd.png'),
       ),
       width: 130.0,
       height: 130.0,
@@ -49,7 +50,6 @@ class _LoginPageState extends State<LoginPage> {
         )
       ),
     );
-    
 
     //Campo de nome de usuário
     final username = TextFormField(
@@ -67,10 +67,12 @@ class _LoginPageState extends State<LoginPage> {
     );
 
 
+    var controller = new MaskedTextController(mask: '+00 (00)00000-0000 ');
+
     //Campo de telefone
     final phone = TextFormField(
-      controller: phoneController,
-      style: TextStyle(fontSize: 20.0, color: Colors.black),
+      controller: controller,
+      style: TextStyle(fontSize: 20.0, color: Colors.black,),
       keyboardType: TextInputType.phone,
       autofocus: false,
       decoration: InputDecoration(
@@ -92,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
         child: MaterialButton(
           minWidth: 200.0,
           height: 50.0,
-          onPressed: () async {            
+          onPressed: () async {
             bool check = false;
             check = await helper.checkContactFb(phoneController.text);
             if (check) {
@@ -100,10 +102,10 @@ class _LoginPageState extends State<LoginPage> {
             }else{
               helper.createContactFb(phoneController.text);
             }
-            
+
             userName = (userController.text);
             phoneNumber = (phoneController.text);
-    
+
           },
           color: Color(0xFFCC4B22),
           child: Text('Entrar', style: TextStyle(color: Colors.white, fontSize: 20.0)),
@@ -123,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
     },
     );
 
-    
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
