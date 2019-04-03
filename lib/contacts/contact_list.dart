@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:carona_prime/contacts/contact_helper.dart';
+import 'package:carona_prime/contacts/contact_page.dart';
 import 'package:flutter/material.dart';
-import 'package:contacts_service/contacts_service.dart';
 
 class ContactList extends StatefulWidget {
   @override
@@ -8,20 +10,105 @@ class ContactList extends StatefulWidget {
 }
 
 class _ContactListState extends State<ContactList> {
-
   ContactHelper helper = ContactHelper();
+
+  List<ContactCp> contacts = List();
 
   @override
   void initState() {
     super.initState();
-    
+   _getAllContacts();
   }
-
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showContactPage();
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Color(0xFFCC4B22),
+      ),
+      body: ListView.builder(
+          padding: EdgeInsets.all(10.0),
+          itemCount: contacts.length,
+          itemBuilder: (context, index) {
+            return _contactCard(context, index);
+          }),
     );
+  }
+
+  Widget _contactCard(BuildContext context, int index) {
+    return GestureDetector(
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Row(
+            children: <Widget>[
+              Container(
+                width: 80.0,
+                height: 80.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  image: DecorationImage(
+                      image: contacts[index].img != null
+                          ? FileImage(File(contacts[index].img))
+                          : AssetImage("assets/logo.png")),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      contacts[index].name ?? "",
+                      style: TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      contacts[index].phone ?? "",
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      onTap: () {
+        _showContactPage(contact: contacts[index]);
+      },
+    );
+  }
+
+  void _showContactPage({ContactCp contact}) async {
+    final redContact = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ContactPage(
+                  contact: contact,
+                )));
+    if(redContact != null){
+      if(contact != null){
+        await helper.updateContactCp(redContact);
+        _getAllContacts();
+      }else{
+        await helper.saveContactCp(redContact);
+      }
+      _getAllContacts();
+    }
+  }
+
+  void _getAllContacts(){
+    helper.getAllContactsCp().then((list){
+      setState(() {
+        contacts = list;
+      });
+    });
   }
 }
