@@ -26,6 +26,7 @@ dependencies:
   permission_handler: '2.0.1'
   google_maps_flutter: '0.2.0'
   firebase_messaging: '2.1.0'
+  location: '1.4.1'
   uuid: '2.0.0'
   
 
