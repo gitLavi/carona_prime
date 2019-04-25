@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 
-class RideMap extends StatelessWidget {
+class RideMap extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
+  _RideMapState createState() => _RideMapState();
 }
 
-class FireMap extends StatefulWidget {
-  @override
-  _FireMapState createState() => _FireMapState();
-}
-
-class _FireMapState extends State<FireMap> {
+class _RideMapState extends State<RideMap> {
   @override
   Widget build(BuildContext context) {
     return Container(

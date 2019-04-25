@@ -48,8 +48,10 @@ class _HomePageState extends State<HomePage> {
         //groupHelper.groupRequest("223322342", testGroup.adm, testGroup.groupId);
         //currentLocation = await location.getLocation();
         print(currentLocation);
-        testGroup.groupName = "Danigrupo";
-        print(testGroup.groupName);
+        Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=> RideMap())
+                );
         
       },
     );
