@@ -3,6 +3,7 @@ import 'package:carona_prime/login/status_login.dart';
 import 'package:carona_prime/login/login_page.dart';
 import 'package:carona_prime/login/welcome_page.dart';
 import 'package:carona_prime/ride/group_helper.dart';
+import 'package:carona_prime/ride/ride_map.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
     var currentLocation = <String, double>{};
 
     PermissionHandler().requestPermissions([PermissionGroup.location]);
+    
 
     testGroup.groupName = "Neucigrupo";
     testGroup.fromTo = "Imperial X UFMT";
@@ -41,11 +43,14 @@ class _HomePageState extends State<HomePage> {
     final testContact = RaisedButton (
       onPressed: () async {
         //helper.mergeFbToCp();
-        testGroup.groupId = uuid.v4();
-        groupHelper.createGroup(testGroup);
-        groupHelper.groupRequest("223322342", testGroup.adm, testGroup.groupId);
+        //testGroup.groupId = uuid.v4();
+        //groupHelper.createGroup(testGroup);
+        //groupHelper.groupRequest("223322342", testGroup.adm, testGroup.groupId);
         //currentLocation = await location.getLocation();
         print(currentLocation);
+        testGroup.groupName = "Danigrupo";
+        print(testGroup.groupName);
+        
       },
     );
 
@@ -86,7 +91,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Caroneiro: " + "5564498232984" + "\n"
+              "Caroneiro: " + testGroup.groupName + "\n"
               "Latitude: " + currentLocation.toString() + "\n"
               
               //"Status: " + status,

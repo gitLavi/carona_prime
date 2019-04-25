@@ -17,6 +17,7 @@ class CustomDrawer extends StatelessWidget {
         children: <Widget>[
           _buildBodyBack(),
           ListView(
+            shrinkWrap: true,
             padding: EdgeInsets.only(left: 32.0, top: 16.0),
             children: <Widget>[
               Container(

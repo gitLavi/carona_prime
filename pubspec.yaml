@@ -10,7 +10,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -27,7 +27,8 @@ dependencies:
   google_maps_flutter: '0.2.0'
   firebase_messaging: '2.1.0'
   location: '1.4.1'
-  uuid: '2.0.0'
+  uuid: '2.0.0' 
+  flutter_local_notifications: '^0.6.0'
   
 
 dev_dependencies:

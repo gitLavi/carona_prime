@@ -44,6 +44,8 @@ class GroupHelper {
     DocumentReference requestList = Firestore.instance.collection("userInfo").document(phone + "_info");
   }
 
+  
+
 }
 
 class RideGroup {
