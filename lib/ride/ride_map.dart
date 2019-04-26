@@ -8,10 +8,16 @@ class RideMap extends StatefulWidget {
   _RideMapState createState() => _RideMapState();
 }
 
+var currentLocation = <String, double>{};
+
+var location = new Location();
+
+Future curretLocation = location.getLocation();
+  
+
 class _RideMapState extends State<RideMap> {
   @override
-
-  LatLng cuiaba = new LatLng(-15.6014, -56.0979);
+  LatLng cuiaba = new LatLng(currentLocation["latitude"], currentLocation["longitude"]);
 
   Widget build(BuildContext context) {
     return Scaffold(
