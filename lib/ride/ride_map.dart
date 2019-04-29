@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
@@ -8,17 +10,27 @@ class RideMap extends StatefulWidget {
   _RideMapState createState() => _RideMapState();
 }
 
-var currentLocation = <String, double>{};
-
-var location = new Location();
-
-Future curretLocation = location.getLocation();
-  
-
 class _RideMapState extends State<RideMap> {
-  @override
-  LatLng cuiaba = new LatLng(currentLocation["latitude"], currentLocation["longitude"]);
 
+  Map<String, double> currentLocation = new Map();
+  StreamSubscription<Map<String,double>> locationSubscription;
+  Location location = new Location();
+  void initState() {
+    super.initState();
+
+    currentLocation['latitude'] = 0.0;
+    currentLocation['longitude'] = 0.0;
+
+    initPlatformState();
+    locationSubscription = location.onLocationChanged().listen((Map<String, double> result){
+      setState(() {
+       currentLocation = result; 
+      });
+    });
+
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: new FlutterMap(
@@ -34,4 +46,13 @@ class _RideMapState extends State<RideMap> {
       ),
     );
   }
+
+  void initPlatformState() async {
+    Map<String, double> myLocation;
+    try{
+      myLocation = await location.getLocation();
+      //error="";
+    }
+  }
+
 }
