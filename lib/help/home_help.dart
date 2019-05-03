@@ -11,24 +11,6 @@ class Help extends StatelessWidget {
     return Stack(
       children: <Widget>[
         _buildBodyBack(),
-        CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              floating: true,
-              snap: true,
-              backgroundColor: Color(0xFFCC4B22),
-              elevation: 0.0,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                  "Ajuda",
-                  style: TextStyle(fontSize: 30.0),
-                ),
-                centerTitle: true,
-              ),
-            )
-          ],
-        ),
-
       ],
     );
   }

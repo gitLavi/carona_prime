@@ -24,9 +24,6 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text('Carona Prime')
-      ),
       bottomNavigationBar: BottomAppBar(
         color: Color(0xFFCC4B22),
         child: new Row(

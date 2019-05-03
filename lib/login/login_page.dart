@@ -1,4 +1,5 @@
 import 'package:carona_prime/contacts/contact_helper.dart';
+import 'package:carona_prime/home/home_screen.dart';
 import 'package:carona_prime/login/status_login.dart';
 import 'package:flutter/material.dart';
 
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
             bool check = false;
             check = await helper.checkContactFb(phoneController.text);
             if (check) {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> StatusLogin()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
             }else{
               helper.createContactFb(phoneController.text);
             }

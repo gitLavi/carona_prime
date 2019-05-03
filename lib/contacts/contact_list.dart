@@ -81,9 +81,62 @@ class _ContactListState extends State<ContactList> {
         ),
       ),
       onTap: () {
-        _showContactPage(contact: contacts[index]);
+        _showOptions(context, index);
       },
     );
+  }
+
+  void _showOptions(BuildContext context, int index){
+    showModalBottomSheet(
+        context: context,
+        builder: (context){
+          return BottomSheet(
+            onClosing: (){},
+            builder: (context){
+              return Container(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child:                     FlatButton(
+                        child: Text("Visualizar",
+                          style:
+                          TextStyle(color: Color(0xFFCC4B22),
+                              fontSize: 20.0
+                          ),
+                        ),
+                        onPressed: (){
+                          Navigator.pop(context);
+                          _showContactPage(contact: contacts[index]);
+                        },
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child:                     FlatButton(
+                          child: Text("Excluir",
+                            style:
+                            TextStyle(color: Color(0xFFCC4B22),
+                                fontSize: 20.0
+                            ),
+                          ),
+                          onPressed: (){
+                            helper.deleteContactCp(contacts[index].id);
+                            setState(() {
+                              contacts.removeAt(index);
+                              Navigator.pop(context);
+                            });
+                          },
+                        ),
+                    )
+                  ],
+                ),
+              );
+            },
+          );
+        });
   }
 
   void _showContactPage({ContactCp contact}) async {

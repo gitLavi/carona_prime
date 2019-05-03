@@ -50,12 +50,13 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               Divider(),
-              DrawerTile(Icons.settings, "Configurações", pageController, 0),
-              DrawerTile(Icons.people, "Meus Grupos", pageController, 1),
+              DrawerTile(Icons.people, "Meus Grupos", pageController, 0),
+              DrawerTile(Icons.settings, "Configurações", pageController, 1),
               DrawerTile(Icons.insert_drive_file, "Termos de Uso", pageController, 2),
               DrawerTile(Icons.lock, "Política de Privacidade", pageController, 3),
               DrawerTile(Icons.help, "Ajuda", pageController, 4),
               DrawerTile(Icons.info, "Sobre", pageController, 5),
+              DrawerTile(Icons.android, "Testes de Layout", pageController, 6),
             ],
 
           )

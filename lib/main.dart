@@ -1,5 +1,4 @@
-import 'package:carona_prime/contacts/contact_list.dart';
-import 'package:carona_prime/login/login_page.dart';
+import 'package:carona_prime/groups_op/group_list.dart';
 import 'package:carona_prime/login/welcome_page.dart';
 import 'package:flutter/material.dart';
 

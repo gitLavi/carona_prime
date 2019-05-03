@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:carona_prime/contacts/contact_helper.dart';
+import 'package:carona_prime/contacts/listgroups.dart';
 import 'package:flutter/material.dart';
 
 class ContactPage extends StatefulWidget {
@@ -15,7 +16,8 @@ class ContactPage extends StatefulWidget {
 class _ContactPageState extends State<ContactPage> {
 
   final _nameController = TextEditingController();
-  final _phoneController = TextEditingController();
+  final _dateController = TextEditingController();
+  final _hourController = TextEditingController();
 
   final _nameFocus = FocusNode();
 
@@ -33,7 +35,7 @@ class _ContactPageState extends State<ContactPage> {
       _editedContact = ContactCp.fromMap(widget.contact.toMap());
 
       _nameController.text = _editedContact.name;
-      _phoneController.text = _editedContact.phone;
+      _dateController.text = _editedContact.phone;
     }
   }
 
@@ -44,17 +46,6 @@ class _ContactPageState extends State<ContactPage> {
         backgroundColor: Color(0xFFCC4B22),
         title: Text(_editedContact.name ?? "Novo Grupo"),
         centerTitle: true,
-      ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            if(_editedContact.name != null && _editedContact.name.isNotEmpty){
-              Navigator.pop(context, _editedContact);
-            }else{
-              FocusScope.of(context).requestFocus(_nameFocus);
-            }
-          },
-          child: Icon(Icons.save),
-          backgroundColor: Color(0xFFCC4B22),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(10.0),
@@ -76,7 +67,10 @@ class _ContactPageState extends State<ContactPage> {
             TextField(
               controller: _nameController,
               focusNode: _nameFocus,
-              decoration: InputDecoration(labelText: "Nome"),
+              decoration: InputDecoration(
+                labelText: "Nome do Grupo",
+                labelStyle: TextStyle(color: Color(0xFFCC4B22)),
+              ),
               onChanged: (text){
                 _userEdited = true;
                 setState(() {
@@ -85,16 +79,54 @@ class _ContactPageState extends State<ContactPage> {
               },
             ),
             TextField(
-              controller: _phoneController,
-              decoration: InputDecoration(labelText: "Telefone"),
+              controller: _dateController,
+              decoration: InputDecoration(
+                  labelText: "Data da Carona",
+                  labelStyle: TextStyle(color: Color(0xFFCC4B22))),
               onChanged: (text){
                 _userEdited = true;
                 _editedContact.phone = text;
               },
-              keyboardType: TextInputType.phone,
             ),
+            TextField(
+              controller: _hourController,
+              decoration: InputDecoration(
+                  labelText: "Horário da Carona",
+                  labelStyle: TextStyle(color: Color(0xFFCC4B22))),
+              onChanged: (text){
+                _userEdited = true;
+                _editedContact.phone = text;
+              },
+            ),
+
           ],
         ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+          color: Color(0xFFCC4B22),
+          child: new Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+
+              FlatButton(
+                child: Text(
+                  'Prosseguir',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0 ,
+                  ),
+                ),
+                onPressed: (){
+                  if(_editedContact.name != null && _editedContact.name.isNotEmpty){
+                    Navigator.pop(context, _editedContact);
+                  }else{
+                    FocusScope.of(context).requestFocus(_nameFocus);
+                  }
+                },
+              ),
+            ],
+          )
       ),
     );
   }
