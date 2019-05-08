@@ -100,13 +100,16 @@ class _GroupNameState extends State<GroupName> {
                   labelText: "Horário da Carona",
                   labelStyle: TextStyle(color: Color(0xFFCC4B22))),
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                caroneiro,
-                motorista
-              ],
+            Padding(
+              padding: EdgeInsets.only(top: 30.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  caroneiro,
+                  motorista
+                ],
+              ),
             )
 
           ],
