@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:carona_prime/contacts/contact_helper.dart';
-import 'package:carona_prime/contacts/listgroups.dart';
 import 'package:flutter/material.dart';
 
 class ContactPage extends StatefulWidget {

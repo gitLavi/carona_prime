@@ -1,5 +1,5 @@
 import 'package:carona_prime/contacts/contact_helper.dart';
-import 'package:carona_prime/contacts/listgroups.dart';
+import 'package:carona_prime/contacts/contact_list.dart';
 import 'package:flutter/material.dart';
 import 'package:carona_prime/login/login_page.dart';
 
@@ -88,7 +88,7 @@ class _StatusLoginState extends State<StatusLogin> {
 
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context)=> GroupsList())
+                  MaterialPageRoute(builder: (context)=> ContactList())
                 );
               },
             ),
