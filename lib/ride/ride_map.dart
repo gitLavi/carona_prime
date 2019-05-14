@@ -12,21 +12,8 @@ class RideMap extends StatefulWidget {
 
 class _RideMapState extends State<RideMap> {
 
-  Map<String, double> currentLocation = new Map();
-  StreamSubscription<Map<String,double>> locationSubscription;
-  Location location = new Location();
   void initState() {
     super.initState();
-
-    currentLocation['latitude'] = 0.0;
-    currentLocation['longitude'] = 0.0;
-
-    initPlatformState();
-    locationSubscription = location.onLocationChanged().listen((Map<String, double> result){
-      setState(() {
-       currentLocation = result; 
-      });
-    });
 
   }
 
@@ -36,7 +23,7 @@ class _RideMapState extends State<RideMap> {
       body: new FlutterMap(
         options: new MapOptions(
           minZoom: 10.0,
-          center: cuiaba
+          //center:
         ),
         layers: [
           new TileLayerOptions(
@@ -45,14 +32,6 @@ class _RideMapState extends State<RideMap> {
         ],
       ),
     );
-  }
-
-  void initPlatformState() async {
-    Map<String, double> myLocation;
-    try{
-      myLocation = await location.getLocation();
-      //error="";
-    }
   }
 
 }
