@@ -1,3 +1,4 @@
+import 'package:carona_prime/groups_op/Car_Espec.dart';
 import 'package:carona_prime/login/status_login.dart';
 import 'package:carona_prime/widgets/map.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _DestinyState extends State<Destiny> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFCC4B22),
-        title: Text("Novo Grupo"),
+        title: Text("Trajeto", style: TextStyle(fontSize: 30.0)),
         centerTitle: true,
       ),
       body: Padding(
@@ -81,7 +82,7 @@ class _DestinyState extends State<Destiny> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context)=> StatusLogin()),
+                              MaterialPageRoute(builder: (context)=> CarEspec()),
                             );
                           },
                         ),

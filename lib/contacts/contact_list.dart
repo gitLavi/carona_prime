@@ -158,6 +158,7 @@ class _ContactListState extends State<ContactList> {
   }
 
   void _getAllContacts(){
+    helper.mergeFbToCp;
     helper.getAllContactsCp().then((list){
       setState(() {
         contacts = list;

@@ -67,18 +67,20 @@ class WelcomePage extends StatelessWidget {
         )
       ),
 
-      body: new Center(
-        child: ListView(
-          shrinkWrap: false,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            SizedBox(height: 60.0),
-            logo,
-            SizedBox(height: 25.0),
-            welcome,
-          ],
+      body: SingleChildScrollView(
+        child: new Center(
+          child: ListView(
+            shrinkWrap: false,
+            padding: EdgeInsets.only(left: 24.0, right: 24.0),
+            children: <Widget>[
+              SizedBox(height: 60.0),
+              logo,
+              SizedBox(height: 25.0),
+              welcome,
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

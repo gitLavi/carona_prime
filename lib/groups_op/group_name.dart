@@ -66,7 +66,7 @@ class _GroupNameState extends State<GroupName> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFCC4B22),
-        title: Text("Novo Grupo"),
+        title: Text("Novo Grupo", style: TextStyle(fontSize: 30.0)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -90,15 +90,17 @@ class _GroupNameState extends State<GroupName> {
                 labelStyle: TextStyle(color: Color(0xFFCC4B22)),
               ),
             ),
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
                   labelText: "Data da Carona",
                   labelStyle: TextStyle(color: Color(0xFFCC4B22))),
+              keyboardType: TextInputType.phone,
             ),
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
                   labelText: "Horário da Carona",
                   labelStyle: TextStyle(color: Color(0xFFCC4B22))),
+              keyboardType: TextInputType.phone,
             ),
             Padding(
               padding: EdgeInsets.only(top: 30.0),
@@ -106,8 +108,18 @@ class _GroupNameState extends State<GroupName> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  caroneiro,
-                  motorista
+                  Column(
+                    children: <Widget>[
+                      Text("Caroneiro", style: TextStyle(color: Color(0xFFCC4B22), fontSize: 20.0),),
+                      caroneiro,
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text("Motorista", style: TextStyle(color: Color(0xFFCC4B22), fontSize: 20.0),),
+                      motorista,
+                    ],
+                  )
                 ],
               ),
             )
@@ -122,6 +134,7 @@ class _GroupNameState extends State<GroupName> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               FlatButton(
+
                 child: Text(
                   'Prosseguir',
                   style: TextStyle(
