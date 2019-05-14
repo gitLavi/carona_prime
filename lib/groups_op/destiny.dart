@@ -44,9 +44,11 @@ class _DestinyState extends State<Destiny> {
                     Expanded(
                       child: TextField(
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 1.0, 0.0),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(5.0, 10.0, 1.0, 0.0),
                             labelText: "Partida",
                             labelStyle: TextStyle(
+                              fontSize: 22.0,
                               color: Color(0xFFCC4B22),
                             )),
                       ),
@@ -54,9 +56,11 @@ class _DestinyState extends State<Destiny> {
                     Expanded(
                       child: TextField(
                         decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 1.0, 0.0),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(5.0, 10.0, 1.0, 0.0),
                             labelText: "Destino",
-                            labelStyle: TextStyle(color: Color(0xFFCC4B22))),
+                            labelStyle: TextStyle(
+                                color: Color(0xFFCC4B22), fontSize: 22.0)),
                       ),
                     ),
                   ],
@@ -64,12 +68,11 @@ class _DestinyState extends State<Destiny> {
               ),
               Align(
                 alignment: Alignment(0.0, 1.0),
-                child:  BottomAppBar(
+                child: BottomAppBar(
                     color: Color(0xFFCC4B22),
                     child: new Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
-
                       children: <Widget>[
                         FlatButton(
                           child: Text(
@@ -82,7 +85,8 @@ class _DestinyState extends State<Destiny> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context)=> CarEspec()),
+                              MaterialPageRoute(
+                                  builder: (context) => CarEspec()),
                             );
                           },
                         ),
