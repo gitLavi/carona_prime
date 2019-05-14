@@ -1,3 +1,4 @@
+import 'package:carona_prime/groups_op/group_list.dart';
 import 'package:flutter/material.dart';
 
 class CarEspec extends StatefulWidget {
@@ -34,7 +35,7 @@ class _CarEspecState extends State<CarEspec> {
             Padding(
               padding: EdgeInsets.only(bottom: 60.0),
               child: Text(
-                
+
                 "Por favor, como motorista, informe as suas especificações de seu carro em relação a carona.",
                 style: TextStyle(fontSize: 20.0, color: Colors.black, ),
               ),
@@ -78,7 +79,11 @@ class _CarEspecState extends State<CarEspec> {
                   ),
                 ),
                 onPressed: () {
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GroupList()),
+                  );
                 },
               ),
             ],
